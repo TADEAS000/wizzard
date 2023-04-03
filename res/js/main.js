@@ -11,7 +11,7 @@ canvas.width = 1920;
 canvas.height = 1080;
 
 begin.onclick = () => {
-  //kokot.style.display = "block"
+  kokot.style.display = "block"
   tutorial.style.display = "none";
   canvas.style.display = "block";
 };
@@ -76,70 +76,8 @@ class Projectile {
   }
 }
 
-class Enemy {
-  constructor({ position }) {
-    this.velocity = {
-      x: 0,
-      y: 0,
-    };
-    const image = new Image();
-    image.src = './res/img/enemy.png';
-    image.onload = () => {
-      this.image = image;
-      this.width = image.width;
-      this.height = image.height;
-      this.position = {
-        x: position.x,
-        y: position.y
-      };
-    };
-  }
-  draw() {
-    ctx.save();
-
-    ctx.drawImage(
-      this.image,
-      this.position.x,
-      this.position.y,
-      this.width,
-      this.height
-    );
-  }
-
-  update() {
-    if (this.image) {
-      this.draw();
-      this.position.x += this.velocity.x;
-      this.position.y += this.velocity.y;
-    }
-  }
-}
-
-class Grid {
-  constructor() {
-    this.position = {
-      x:0,
-      y:0
-    }
-    this.velocity = {
-      x:0,
-      y:0
-    }
-    this.invaders = []
-
-    for (let i = 0; i<10; i++) {
-      this.invaders.push(new Enemy())
-    }
-    console.log(this.invaders)
-  }
-  update(){
-
-  }
-}
-
 const player = new Player();
 const projectiles = [];
-const grids = [new Grid()]
 const keys = {
   w: {
     pressed: false,
@@ -164,12 +102,6 @@ function animate() {
     projectile.update();
   });
 
-  grids.forEach(grid =>{
-    grid.update()
-    grid.invaders.forEach(invader => {
-      invader.update
-    })
-  })
 
   if (keys.a.pressed && player.position.x >= 0) {
     player.velocity.x = -5;
